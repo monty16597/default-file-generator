@@ -21,7 +21,7 @@ inputs:
     description: 'Recursive mode to generate files in multiple directories.'
     default: false
   RECURSIVE_DEPTH:
-    description: 'Recursive search depth. Please pass numbers. 1 means in all directories which are in WORK_DIR, it won't include subdirectories of those directories.'
+    description: 'Recursive search depth. Please pass numbers. 1 means in all directories which are in WORK_DIR, it will not include subdirectories of those directories.'
     default: 1
 runs:
   using: 'docker'
