@@ -64,6 +64,9 @@ function add_file {
 }
 
 git_setup
+echo "######"
+echo $INPUT_FILE_CONTENT
+echo "######"
 
 if [[ $INPUT_RECURSIVE == 'true' ]]; then
     echo "Recursive enabled"
