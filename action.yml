@@ -1,29 +1,19 @@
 # action.yml
-name: 'Default file generator'
-description: 'Generate default file'
+name: 'Ec2-start-stop'
+description: 'Start and stop ec2'
 inputs:
-  WORK_DIR:
-    description: 'Working directory to start with.'
+  AWS_REGION:  # id of input
+    description: 'EC2 Region of EC2'
     required: true
-    default: './'
-  FILE_NAME:
-    description: 'Name of the file which needs to be created.'
+  EC2_IDS:  # id of input
+    description: 'Instance ids (comma seperated)'
     required: true
-  FILE_CONTENT:
-    description: 'Content of the file which needs to be added.'
+  AWS_EC2_ACTION:  # id of input
+    description: 'start/stop'
     required: true
-  OVERRIDE_CONTENT:
-    description: 'Flag to override the content of existing file or not. Valid values are "true" or "false"'
-    required: true
-    default: false
-  RECURSIVE:
-    description: 'Recursive mode to generate files in multiple directories.'
-    required: true
-    default: false
-  RECURSIVE_DEPTH:
-    description: 'Recursive search depth. Please pass numbers. 1 means in all directories which are in WORK_DIR, it won't include subdirectories of those directories.'
-    required: true
-    default: 1
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
