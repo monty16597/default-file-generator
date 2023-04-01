@@ -83,4 +83,4 @@ else
 fi
 
 git_commit
-git push
+# git push
