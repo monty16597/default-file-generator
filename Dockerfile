@@ -1,6 +1,6 @@
 # Container image that runs your code
-FROM alpine:3.17.3
+FROM bash:5.0-alpine3.16
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +X /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
