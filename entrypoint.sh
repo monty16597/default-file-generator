@@ -22,7 +22,10 @@ function add_file {
 
 if [[ $INPUT_RECURSIVE == 'true' ]]; then
     echo "Recursive enabled"
-    DIRECTORIES=$(find $INPUT_WORK_DIR -maxdepth $INPUT_RECURSIVE_DEPTH -type d)
+    if [[ $INPUT_RECURSIVE_INCLUDE_WORK_DIR == 'true' ]]; then
+        DIRECTORIES=$(find $INPUT_WORK_DIR -maxdepth $INPUT_RECURSIVE_DEPTH -type d)
+    else
+        DIRECTORIES=$(find $INPUT_WORK_DIR -maxdepth $INPUT_RECURSIVE_DEPTH ! -path $INPUT_WORK_DIR -type d)
     for dir in $DIRECTORIES;
     do
         add_file "$dir"

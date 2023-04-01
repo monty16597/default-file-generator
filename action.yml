@@ -23,6 +23,9 @@ inputs:
   RECURSIVE_DEPTH:
     description: 'Recursive search depth. Please pass numbers. 1 means in all directories which are in WORK_DIR, it will not include subdirectories of those directories.'
     default: 1
+  RECURSIVE_INCLUDE_WORK_DIR:
+    description: 'Pass true if you want to create file in the work dir as well.'
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
