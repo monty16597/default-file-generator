@@ -26,6 +26,15 @@ inputs:
   RECURSIVE_INCLUDE_WORK_DIR:
     description: 'Pass true if you want to create file in the work dir as well.'
     default: false
+  GIT_PUSH_USER_NAME:
+    description: 'User name of the bot user'
+    default: 'github-actions[bot]'
+  GIT_PUSH_USER_EMAIL:
+    description: 'Email of the bot user'
+    default: 'github-actions[bot]@users.noreply.github.com'
+  GIT_COMMIT_MESSAGE:
+    description: 'Commit message'
+    default: 'file-generator: automated action'
 runs:
   using: 'docker'
   image: 'Dockerfile'

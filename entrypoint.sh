@@ -1,6 +1,49 @@
 #!/bin/bash
 set -e
 
+git_setup() {
+    # When the runner maps the $GITHUB_WORKSPACE mount, it is owned by the runner
+    # user while the created folders are owned by the container user, causing this
+    # error. Issue description here: https://github.com/actions/checkout/issues/766
+    git config --global --add safe.directory /github/workspace
+
+    git config --global user.name "${INPUT_GIT_PUSH_USER_NAME}"
+    git config --global user.email "${INPUT_GIT_PUSH_USER_EMAIL}"
+    git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
+}
+
+git_add() {
+    local file
+    file="$1"
+    git add "${file}"
+    if [ "$(git status --porcelain | grep "$file" | grep -c -E '([MA]\W).+')" -eq 1 ]; then
+        echo "Added ${file} to git staging area"
+    else
+        echo "No change in ${file} detected"
+    fi
+}
+
+git_status() {
+    git status --porcelain | grep -c -E '([MA]\W).+' || true
+}
+
+git_commit() {
+    if [ "$(git_status)" -eq 0 ]; then
+        echo "No files changed, skipping commit"
+        exit 0
+    fi
+
+    echo "Following files will be committed"
+    git status -s
+
+    local args=(
+        -m "${INPUT_GIT_COMMIT_MESSAGE}"
+    )
+
+    git commit "${args[@]}"
+}
+
+
 function add_file {
     _work_dir=$1
     if [ ! -d "${_work_dir%%/}" ]; then
@@ -34,3 +77,7 @@ if [[ $INPUT_RECURSIVE == 'true' ]]; then
 else
     add_file "$INPUT_WORK_DIR"
 fi
+
+git_setup
+git_commit
+git push
