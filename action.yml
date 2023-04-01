@@ -1,0 +1,29 @@
+# action.yml
+name: 'Default file generator'
+description: 'Generate default file'
+inputs:
+  WORK_DIR:
+    description: 'Working directory to start with.'
+    required: true
+    default: './'
+  FILE_NAME:
+    description: 'Name of the file which needs to be created.'
+    required: true
+  FILE_CONTENT:
+    description: 'Content of the file which needs to be added.'
+    required: true
+  OVERRIDE_CONTENT:
+    description: 'Flag to override the content of existing file or not. Valid values are "true" or "false"'
+    required: true
+    default: false
+  RECURSIVE:
+    description: 'Recursive mode to generate files in multiple directories.'
+    required: true
+    default: false
+  RECURSIVE_DEPTH:
+    description: 'Recursive search depth. Please pass numbers. 1 means in all directories which are in WORK_DIR, it won't include subdirectories of those directories.'
+    required: true
+    default: 1
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
