@@ -1,19 +1,25 @@
-# action.yml
-name: 'Ec2-start-stop'
-description: 'Start and stop ec2'
+name: 'File Generator'
+description: 'Generate files into specified directories and sub-directories.'
+author: 'Manjeetsinh Alonja'
+branding:
+  icon: 'git-pull-request'
+  color: 'purple'
 inputs:
-  AWS_REGION:  # id of input
-    description: 'EC2 Region of EC2'
+  WORK_DIR:
+    description: 'Working directory to start with. For root it is ./'
     required: true
-  EC2_IDS:  # id of input
-    description: 'Instance ids (comma seperated)'
+  FILE_NAME:
+    description: 'Name of the file which needs to be created.'
     required: true
-  AWS_EC2_ACTION:  # id of input
-    description: 'start/stop'
+  FILE_CONTENT:
+    description: 'Content of the file which needs to be added.'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  OVERRIDE_CONTENT:
+    description: 'Flag to override the content of existing file or not. Valid values are "true" or "false"'
+    default: false
+  RECURSIVE:
+    description: 'Recursive mode to generate files in multiple directories.'
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
