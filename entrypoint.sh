@@ -63,6 +63,8 @@ function add_file {
     fi
 }
 
+git_setup
+
 if [[ $INPUT_RECURSIVE == 'true' ]]; then
     echo "Recursive enabled"
     if [[ $INPUT_RECURSIVE_INCLUDE_WORK_DIR == 'true' ]]; then
@@ -73,11 +75,12 @@ if [[ $INPUT_RECURSIVE == 'true' ]]; then
     for dir in $DIRECTORIES;
     do
         add_file "$dir"
+        git_add "${dir%%/}/${INPUT_FILE_NAME}"
     done
 else
     add_file "$INPUT_WORK_DIR"
+    git_add "${INPUT_WORK_DIR%%/}/${INPUT_FILE_NAME}"
 fi
 
-git_setup
 git_commit
 git push
