@@ -38,3 +38,14 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    INPUT_WORK_DIR: ${{ input.WORK_DIR }}
+    INPUT_FILE_NAME: ${{ input.FILE_NAME }}
+    INPUT_FILE_CONTENT: ${{ input.FILE_CONTENT }}
+    INPUT_OVERRIDE_CONTENT: ${{ input.OVERRIDE_CONTENT }}
+    INPUT_RECURSIVE: ${{ input.RECURSIVE }}
+    INPUT_RECURSIVE_DEPTH: ${{ input.RECURSIVE_DEPTH }}
+    INPUT_RECURSIVE_INCLUDE_WORK_DIR: ${{ input.RECURSIVE_INCLUDE_WORK_DIR }}
+    INPUT_GIT_PUSH_USER_NAME: ${{ input.GIT_PUSH_USER_NAME }}
+    INPUT_GIT_PUSH_USER_EMAIL: ${{ input.GIT_PUSH_USER_EMAIL }}
+    INPUT_GIT_COMMIT_MESSAGE: ${{ input.GIT_COMMIT_MESSAGE }}
